@@ -5,14 +5,16 @@ class Menu
 {
 private:
     float _width, _height;
-    int buttonSelected;
-    std::vector<sf::Text> buttonList;
-    sf::Image gameTitle;
-    sf::Font font;
+    int _buttonSelected;
+    std::vector<sf::Text> _buttonList;
+    sf::Sprite _gameTitle;
+    sf::Font _font;
 
 public:
-    Menu();
+    Menu(const sf::Texture &textureTitle);
     void draw(sf::RenderWindow &window);
+    std::vector<sf::Text> getButtonList() const;
+    sf::Sprite getGameTitle() const;
 
     ~Menu();
 };
