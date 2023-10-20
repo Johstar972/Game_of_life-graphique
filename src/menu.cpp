@@ -1,7 +1,8 @@
 #include "../header/menu.hpp"
 
-Menu::Menu(const sf::Texture &textureTitle)
+Menu::Menu()
 {
+    
     _width = 400; _height = 600;
     if(!_font.loadFromFile("../image_fonts/Roboto-Light.ttf"))
         std::cout<<"font not found"<<std::endl;
@@ -16,21 +17,25 @@ Menu::Menu(const sf::Texture &textureTitle)
         if(i == 0)
         {
             _buttonList[i].setString("Play");
-            _buttonList[i].setPosition(325,250);
+            _buttonList[i].setPosition(425,250);
         }
         else if(i == 1)
         {
             _buttonList[i].setString("Quit");
-            _buttonList[i].setPosition(325,350);
+            _buttonList[i].setPosition(425,350);
             
             
         }
     }
+
+    
+    if(!_gameTitleTexture.loadFromFile(("../image_fonts/main_menu_title.png")))
+        std::perror("picture not found");
     
     
-    _gameTitle.setTexture(textureTitle);
+    _gameTitleSprite.setTexture(_gameTitleTexture);
     //_gameTitle.setTextureRect(sf::IntRect(150,100,400,100));
-    _gameTitle.setPosition(60,75);
+    _gameTitleSprite.setPosition(120,75);
     
         
 }
@@ -54,5 +59,5 @@ std::vector<sf::Text> Menu::getButtonList() const
 
 sf::Sprite Menu::getGameTitle() const
 {
-    return _gameTitle;
+    return _gameTitleSprite;
 }

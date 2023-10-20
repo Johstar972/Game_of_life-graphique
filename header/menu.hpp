@@ -6,15 +6,46 @@ class Menu
 private:
     float _width, _height;
     int _buttonSelected;
+    
     std::vector<sf::Text> _buttonList;
-    sf::Sprite _gameTitle;
+    sf::Texture _gameTitleTexture;
+    sf::Sprite _gameTitleSprite;
     sf::Font _font;
 
 public:
-    Menu(const sf::Texture &textureTitle);
+    /**
+     * @brief Construct a new Menu object
+     * 
+     */
+    Menu();
+
+    /**
+     * @brief 
+     * 
+     * @param window 
+     */
     void draw(sf::RenderWindow &window);
+
+    /**
+     * @brief Get the Button List object
+     * 
+     * @return std::vector<sf::Text> 
+     */
     std::vector<sf::Text> getButtonList() const;
+
+    /**
+     * @brief Get the Game Title object
+     * 
+     * @return sf::Sprite 
+     */
     sf::Sprite getGameTitle() const;
+
+    /**
+     * @brief Get the Window Menu object
+     * 
+     * @return sf::RenderWindow 
+     */
+    sf::RenderWindow getWindowMenu() const;
 
     ~Menu();
 };
