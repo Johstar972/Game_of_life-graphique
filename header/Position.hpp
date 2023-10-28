@@ -62,6 +62,8 @@ public:
      * @return retour une chaine de caractère de l'objet
      */
     //friend std::ostream& operator<<(std::ostream& os, Position& position);
+
+    // bool operator==(const Position &position) const;
 };
 
 

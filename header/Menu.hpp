@@ -40,12 +40,6 @@ public:
      */
     sf::Sprite getGameTitle() const;
 
-    /**
-     * @brief Get the Window Menu object
-     * 
-     * @return sf::RenderWindow 
-     */
-    sf::RenderWindow getWindowMenu() const;
 
     ~Menu();
 };

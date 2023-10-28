@@ -8,7 +8,11 @@
                 "-fdiagnostics-color=always",
                 "-g",
                 "${file}",
-                "menu.cpp",
+                "Menu.cpp",
+                "Cell.cpp",
+                "Grid.cpp",
+                "Game.cpp",
+                "Position.cpp",
                 "-o",
                 "${fileDirname}/${fileBasenameNoExtension}",
                 "-I/usr/include/SFML",       // Chemin vers les fichiers d'en-tête de SFML

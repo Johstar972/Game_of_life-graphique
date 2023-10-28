@@ -1,7 +1,7 @@
 #ifndef CELL_H
 #define CELL_H
 #include <iostream>
-#include "position.hpp"
+#include "Position.hpp"
 #include <SFML/Graphics.hpp>
 
 class Cell
@@ -9,6 +9,7 @@ class Cell
 private:
     int _alive;
     sf::RectangleShape _shape;
+    sf::FloatRect _bounds;
     Position _position;
 
 public:
@@ -53,7 +54,16 @@ public:
      */
     Position getPosition() const;
 
-    sf::RectangleShape getShape() const;
+    /**
+     * @brief Get the Shape object
+     * 
+     * @return sf::RectangleShape& 
+     */
+    sf::RectangleShape &getShape();
+
+    sf::FloatRect getRectBounds() const;
+
+    void setRectBounds(sf::FloatRect fr);
 
     /**
      * @brief Méthode permettant de modifier la position d'une cellule
@@ -78,24 +88,29 @@ public:
      * @param cell La cellule
      * @return std::ostream&
      */
-    friend std::ostream &operator<<(std::ostream &os, const Cell &cell);
+    // friend std::ostream &operator<<(std::ostream &os, const Cell &cell);
+
+    // bool operator==(const Cell &cell) const;
+
+    // bool operator!=(const Cell &cell);
 };
 
-inline std::ostream &operator<<(std::ostream &os, const Cell &cell)
-{
-    if(cell._alive == 0)
-    {
-        os << "Cellule morte en :" << "(" << cell._position.getX() <<"," << cell._position.getY() << ")" << std::endl;
+// inline std::ostream &operator<<(std::ostream &os, const Cell &cell)
+// {
+//     if(cell._alive == 0)
+//     {
+//         os << "Cellule morte en :" << "(" << cell._position.getX() <<"," << cell._position.getY() << ")" << std::endl;
 
-    }
-    else
-    {
-        os << "Cellule vivante: " << "(" << cell._position.getX() <<"," << cell._position.getY() << ")" << std::endl;
+//     }
+//     else
+//     {
+//         os << "Cellule vivante: " << "(" << cell._position.getX() <<"," << cell._position.getY() << ")" << std::endl;
 
-    }
+//     }
 
-    return os;
-}
+//     return os;
+// }
+
 
 inline void Cell::setAlive(int alive)
 {
