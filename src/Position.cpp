@@ -27,13 +27,6 @@ int Position::getY() const
 }
 
 
-// std::ostream& operator<<(std::ostream& os, Position& position)
-// {
-//     os << "X : "<< position._x <<", Y : "<< position._y << std::endl;
-
-//      return os;
-// }
-
 // bool Position::operator==(const Position &position) const
 // {
 //     return (_x == position._x && _y == position._y);

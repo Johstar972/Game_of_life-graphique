@@ -4,7 +4,7 @@
 
 int main()
 {
-    //Activation de l'anticrenelage pour un rendur plus lisse sur les bords
+    //Activation de l'anticrenelage pour un rendu plus lisse sur les bords
     sf::ContextSettings settings;
     settings.antialiasingLevel = 8;
 

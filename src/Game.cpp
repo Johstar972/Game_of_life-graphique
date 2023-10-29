@@ -5,8 +5,8 @@
 
 Game::Game()
 {
-    window.create(sf::VideoMode(1000, 1000), "Game of life", sf::Style::Close);
-    unsigned int screenSize_x = SCREEN[0].width / 3;
+    window.create(sf::VideoMode(2000, 1000), "Game of life", sf::Style::Close);
+    unsigned int screenSize_x = SCREEN[0].width / 8;
     unsigned int screenSize_y = SCREEN[0].height / 6;
     window.setPosition(sf::Vector2i(screenSize_x, screenSize_y));
 }
@@ -18,9 +18,13 @@ Game::~Game()
 void Game::run()
 {
     Menu menu;
-    Grid grid;
+    //Mettre une limite de colonne a 100
+    Grid grid(window, 20, 25);
     //TODO:Enlever le booleen pour l'etat du jouer car ecrit hello en boucle
     bool inGame = false; // Un indicateur pour savoir si nous sommes dans le jeu
+    bool initGame = false;
+
+    //grid.draw(window, 10, 10);
 
     while (window.isOpen())
     {
@@ -32,21 +36,25 @@ void Game::run()
             {
                 window.close();// On ferme la fenêtre
             }
-            else if(event.type == sf::Event::Resized)//Si c'est un event de resize
-            {
-                sf::FloatRect visibleArea(0,0,event.size.width, event.size.height);//On synchronise la taille de la vue sur celle de la fenêtre
-                window.setView(sf::View(visibleArea));
-            }
             else if(event.type == sf::Event::MouseButtonPressed)//Si c'est un event où l'on clic sur un bouton de la souris
             {
-                //On stock les bouton du menu dans des variables
-                sf::Text buttonPlay = menu.getButtonList()[0];
-                sf::Text buttonQuit = menu.getButtonList()[1];
-                sf::Sprite gameTitleSprite = menu.getGameTitle();
-
                 //On récupère la position de la souris
                 int mouseX = sf::Mouse::getPosition(window).x;
                 int mouseY = sf::Mouse::getPosition(window).y;
+
+                if(inGame)
+                {
+                    grid.update(window); 
+                    std::cout << "je clique pendant que le jeu est activer" << std::endl;
+                    grid.cellIsClicked(mouseX, mouseY);
+                    
+                }
+                else
+                {
+                    //On stock les bouton du menu dans des variables
+                sf::Text buttonPlay = menu.getButtonList()[0];
+                sf::Text buttonQuit = menu.getButtonList()[1];
+                sf::Sprite gameTitleSprite = menu.getGameTitle();
 
                 //On récupère le nuage de point des boutons du menu
                 sf::FloatRect buttonQuitBounds = buttonQuit.getGlobalBounds();
@@ -63,16 +71,16 @@ void Game::run()
                     std::cout << "C'est le bouton quit !" << std::endl;
                     window.close();//On ferme la fenetre
                 }
+                }
+                
             }
 
             window.clear();
 
-            if (inGame) {
-                //TODO:Verifier que les row et col entrer sont supérieur a 0 et inferieur ou egal a 1000;
-                //TODO:Enlever le booleen pour l'etat du jouer car ecrit hello en boucle
-                std::cout<<"hello";
-                grid.init(window, 10,10);
-                grid.draw(window);
+            if (inGame)
+            {
+
+                grid.update(window);
                 
             } else {
                 // Affichez le menu

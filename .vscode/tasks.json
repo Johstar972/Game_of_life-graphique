@@ -7,14 +7,14 @@
             "args": [
                 "-fdiagnostics-color=always",
                 "-g",
-                "${file}",
+                "${workspaceFolder}/src/main.cpp",
                 "Menu.cpp",
                 "Cell.cpp",
                 "Grid.cpp",
                 "Game.cpp",
                 "Position.cpp",
                 "-o",
-                "${fileDirname}/${fileBasenameNoExtension}",
+                "${workspaceFolder}/src/main",
                 "-I/usr/include/SFML",       // Chemin vers les fichiers d'en-tête de SFML
                 "-L/usr/lib/x86_64-linux-gnu",                 // Chemin vers les bibliothèques de SFML
                 "-lsfml-graphics",

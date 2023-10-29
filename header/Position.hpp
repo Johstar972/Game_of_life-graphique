@@ -61,12 +61,17 @@ public:
      * @param position l'objet à afficher
      * @return retour une chaine de caractère de l'objet
      */
-    //friend std::ostream& operator<<(std::ostream& os, Position& position);
+    friend std::ostream& operator<<(std::ostream& os, Position& position);
 
     // bool operator==(const Position &position) const;
 };
 
+inline std::ostream& operator<<(std::ostream& os, Position& position)
+{
+    os << "X : "<< position._x <<", Y : "<< position._y << std::endl;
 
+     return os;
+}
 
 inline void Position::setX(int newX)
 {

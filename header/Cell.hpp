@@ -88,28 +88,27 @@ public:
      * @param cell La cellule
      * @return std::ostream&
      */
-    // friend std::ostream &operator<<(std::ostream &os, const Cell &cell);
+    friend std::ostream &operator<<(std::ostream &os, const Cell &cell);
 
     // bool operator==(const Cell &cell) const;
 
     // bool operator!=(const Cell &cell);
 };
 
-// inline std::ostream &operator<<(std::ostream &os, const Cell &cell)
-// {
-//     if(cell._alive == 0)
-//     {
-//         os << "Cellule morte en :" << "(" << cell._position.getX() <<"," << cell._position.getY() << ")" << std::endl;
+inline std::ostream &operator<<(std::ostream &os, const Cell &cell)
+{
+    if(cell._alive == 0)
+    {
+        os << "Cellule morte en :" << "(" << cell._position.getX() <<"," << cell._position.getY() << ")" << std::endl;
 
-//     }
-//     else
-//     {
-//         os << "Cellule vivante: " << "(" << cell._position.getX() <<"," << cell._position.getY() << ")" << std::endl;
+    }
+    else
+    {
+        os << "Cellule vivante: " << "(" << cell._position.getX() <<"," << cell._position.getY() << ")" << std::endl;
 
-//     }
-
-//     return os;
-// }
+    }
+    return os;
+}
 
 
 inline void Cell::setAlive(int alive)
