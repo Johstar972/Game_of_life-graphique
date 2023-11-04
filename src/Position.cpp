@@ -27,8 +27,8 @@ int Position::getY() const
 }
 
 
-// bool Position::operator==(const Position &position) const
-// {
-//     return (_x == position._x && _y == position._y);
+bool Position::operator==(const Position &position) const
+{
+    return (_x == position._x && _y == position._y);
   
-// }
+}

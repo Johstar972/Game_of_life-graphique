@@ -10,9 +10,10 @@
                 "${workspaceFolder}/src/main.cpp",
                 "Menu.cpp",
                 "Cell.cpp",
-                "Grid.cpp",
+                "GameBoard.cpp",
                 "Game.cpp",
                 "Position.cpp",
+                "GameSetting.cpp",
                 "-o",
                 "${workspaceFolder}/src/main",
                 "-I/usr/include/SFML",       // Chemin vers les fichiers d'en-tête de SFML

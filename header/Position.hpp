@@ -63,7 +63,7 @@ public:
      */
     friend std::ostream& operator<<(std::ostream& os, Position& position);
 
-    // bool operator==(const Position &position) const;
+    bool operator==(const Position &position) const;
 };
 
 inline std::ostream& operator<<(std::ostream& os, Position& position)

@@ -12,6 +12,11 @@ int main()
 
     game.run();
 
+    /*
+    TODO:Arranger les limite de ligne et de colonne pour l'utilisateur
+    Ajouter le menu de controle a droite de l'ecran
+    positionner le titre de les butons
+    */
 
     
 

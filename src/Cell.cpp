@@ -51,16 +51,22 @@ sf::FloatRect Cell::getRectBounds() const
     return this->_bounds;
 }
 
+float &Cell::getRectSize()
+{
+    return _rectSize;
+}
+
 void Cell::setRectBounds(sf::FloatRect fr)
 {
     this->_bounds = fr;
 }
-// bool Cell::operator==(const Cell &cell) const
-// {
-//     return(_alive == cell._alive && _position.operator==(cell._position));
-// }
 
-// bool Cell::operator!=(const Cell &cell)
-// {
-//     return !(this->operator==(cell));
-// }
+bool Cell::operator==(const Cell &cell) const
+{
+    return(_alive == cell._alive && _position.operator==(cell._position));
+}
+
+bool Cell::operator!=(const Cell &cell)
+{
+    return !(this->operator==(cell));
+}

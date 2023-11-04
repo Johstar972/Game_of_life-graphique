@@ -14,32 +14,35 @@ private:
 
 public:
     /**
-     * @brief Construct a new Menu object
+     * @brief Constructeur par défaut de la class Menu
      * 
      */
     Menu();
 
     /**
-     * @brief 
+     * @brief Méthide permettant de dessiner le menu
      * 
-     * @param window 
+     * @param window La fenêtre
      */
     void draw(sf::RenderWindow &window);
 
     /**
-     * @brief Get the Button List object
+     * @brief Méthode permettant de récupérer la liste des boutons
      * 
-     * @return std::vector<sf::Text> 
+     * @return std::vector<sf::Text> La liste des boutons
      */
     std::vector<sf::Text> getButtonList() const;
 
     /**
-     * @brief Get the Game Title object
+     * @brief Méthode permettant de récupérer le sprite du titre du jeu
      * 
      * @return sf::Sprite 
      */
     sf::Sprite getGameTitle() const;
 
-
+    /**
+     * @brief Destructeur de la class Menu
+     * 
+     */
     ~Menu();
 };
