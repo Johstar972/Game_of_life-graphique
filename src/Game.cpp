@@ -21,7 +21,7 @@ void Game::run()
     //Mettre une limite de colonne a 100
     GameBoard gameBoard(window, 75, 50);
     
-    bool inGame = _isRun; // Un indicateur pour savoir si le jeu est lancé
+    bool &inGame = _isRun; // Un indicateur pour savoir si le jeu est lancé
     sf::Clock clock;
 
     while (window.isOpen())
@@ -45,7 +45,7 @@ void Game::run()
                     if(inGame)
                     { 
                         gameBoard.cellIsClicked(mouseX, mouseY);
-                        gameBoard.buttonTextIsClicked(mouseX, mouseY, inGame, window);
+                        _isRun = gameBoard.buttonTextIsClicked(mouseX, mouseY, inGame, window);
                         
                     }
                     else

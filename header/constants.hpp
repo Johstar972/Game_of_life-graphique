@@ -4,7 +4,10 @@
 #include <SFML/Graphics.hpp>
 #include <array>
 
+//Game
 const std::vector<sf::VideoMode> SCREEN = sf::VideoMode::getFullscreenModes();
+const bool GAME_RUN = true;
+const bool GAME_off = false;
 
 //Grid
 const int WIDTH_GAME = 2000;

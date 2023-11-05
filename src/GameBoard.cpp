@@ -117,7 +117,7 @@ void GameBoard::update(sf::RenderWindow &window)
     
 }
 
-void GameBoard::buttonTextIsClicked(int mouseX, int mouseY, bool state, sf::RenderWindow &window)
+bool GameBoard::buttonTextIsClicked(int mouseX, int mouseY, bool state, sf::RenderWindow &window)
 {
     const std::vector<sf::Text> &buttons = _gameSetting.getButtonSetting();
 
@@ -141,6 +141,11 @@ void GameBoard::buttonTextIsClicked(int mouseX, int mouseY, bool state, sf::Rend
                 break;
             case 3: 
                 std::cout << "bouton main menu"<< std::endl;
+                if(state == true)
+                    state = false;
+                    clearGameBoard(window);
+                    _canChange = false;
+                    return state;
                 //Faire en sorte que _isRun passe a false
                 break;
             case 4: 
@@ -154,6 +159,8 @@ void GameBoard::buttonTextIsClicked(int mouseX, int mouseY, bool state, sf::Rend
             
         }
     }
+
+    return true;
 }
 
 void GameBoard::changeCellSize(int buttonId)

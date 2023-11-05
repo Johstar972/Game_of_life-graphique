@@ -50,16 +50,17 @@ public:
      */
     void changeCellSize(int buttonId);
 
-
-
     /**
      * @brief Cette fonction membre permettra de réaliser une action en cliquant sur les boutons textuels
      * 
      * @param mouseX Le point x de la position de la souris
      * @param mouseY Le point y de la position de la souris
      * @param state L'état du jeu
+     * @param window La fenetre de jeu
+     * @return true Si le jeu est toujours en marche
+     * @return sinon false 
      */
-    void buttonTextIsClicked(int mouseX, int mouseY, bool state, sf::RenderWindow& window);
+    bool buttonTextIsClicked(int mouseX, int mouseY, bool state, sf::RenderWindow& window);
 
     /**
      * @brief Méthode permetant de vérifier le nombre de voisin mort et vivant autour d'une cellule
