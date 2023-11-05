@@ -78,7 +78,7 @@ void Game::run()
 
         }
 
-            std::cout << clock.getElapsedTime().asSeconds() << std::endl;
+            
             clock.restart();
             window.clear();
 

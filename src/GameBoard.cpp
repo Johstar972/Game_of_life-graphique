@@ -112,8 +112,6 @@ void GameBoard::update(sf::RenderWindow &window)
     {
         window.draw(buttons[i]);
     }
-
-    std::cout << "maj" << std::endl;
     
 }
 
@@ -167,7 +165,7 @@ void GameBoard::changeCellSize(int buttonId)
 {
     if(buttonId == 4)
     {
-        std::cout << "J'augmente le nombre de cellule et leurs taille";
+        std::cout << "J'augmente la taille des cellules";
         //On augmente la taille de la cellule
         _currentSizeCell += 1;
         for(int i = 0; i < _row; i++)
@@ -186,7 +184,7 @@ void GameBoard::changeCellSize(int buttonId)
     }
     else if(buttonId == 5)
     {
-        std::cout << "Je diminue le nombre de cellule sur les lignes";
+        std::cout << "Je diminue la taille des cellules";
         
         if(_row > 4)
             this->setNumberRow(_row - 1);
