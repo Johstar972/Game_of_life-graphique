@@ -10,26 +10,6 @@ GameBoard::GameBoard(sf::RenderWindow &window, int row, int col)
     
     //On donne aux attributs la valeur de ligne et de colonne que l'utilisateur a choisie
     this->setNumberRow(row); this->setNumberCol(col);
-    this->_currentSizeCell = 1;
-    // if(_row > 50 && _col > 34 && _row <= 60 && _col <= 40)
-    // {
-    //     rectsize = 25.f;
-    // }
-    // else if(_row > 60 && _col > 40 && _row <= 75 && _col <= 50)
-    // {
-    //     rectsize = 20.f;
-    // }
-    // else if(_row > 60 && _col > 40 && _row <= 150 && _col <= 100)
-    // {
-    //     rectsize = 10.f;
-    // }
-    // else if(_row > 150 && _col > 100 && _row <= 300 && _col <= 200)
-    // {
-    //     rectsize = 5.f;
-    // }
-    //On stock dans deux variables le point ou commencera le dessin de la grille en fonction du nombre de ligne et de colonne
-    // int startPointRow = ((window.getSize().x - (row * rectsize)) / 2) - 250;
-    // int startPointCol = ((window.getSize().y - (col * rectsize)) / 2);
 
     //On ajuste la taille du vector
     _cells.resize(_row,std::vector<Cell>(_col));
@@ -39,17 +19,7 @@ GameBoard::GameBoard(sf::RenderWindow &window, int row, int col)
     {
         for(int j = 0; j < _col; j++)
         {
-            _cells[i][j].setCurrentCellSize(SIZES[_currentSizeCell]);
-            float &size = _cells[i][j].getRectSize();
-            sf::RectangleShape &shape = _cells[i][j].getShape();
-            shape.setSize(sf::Vector2f(size,size));
-            shape.setPosition((i*size + 15),(j*size + 10));
-
-            shape.setOutlineColor(sf::Color::White);
-            shape.setOutlineThickness(2.f);
-            shape.setFillColor(sf::Color(220,220,220));
-            _cells[i][j].setRectBounds(shape.getGlobalBounds());
-            _cells[i][j].setPosition(i,j);
+            _cells[i][j].initShape(i,j);
             
         }
     }
@@ -128,7 +98,6 @@ void GameBoard::update(sf::RenderWindow &window)
         for(int j = 0; j < _col; j++)
         {
             sf::RectangleShape &shape = _cells[i][j].getShape();
-        
             window.draw(shape);
         }
     }
@@ -298,7 +267,7 @@ void GameBoard::clearGameBoard(sf::RenderWindow &window)
             sf::RectangleShape &shape = _cells[i][j].getShape();
             if(_cells[i][j].getAlive() == 1)
                 _cells[i][j].setAlive(0);
-            shape.setFillColor(sf::Color::Black);
+            shape.setFillColor(sf::Color(220,220,220));
         }
     }
 }

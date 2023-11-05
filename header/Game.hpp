@@ -8,7 +8,7 @@ class Game
 {
 private:
     sf::RenderWindow window;
-    const sf::Time TIME_PER_SECOND = sf::seconds(1.f/60.f);
+    const sf::Time TIME_PER_SECOND = sf::seconds(5.f);
     bool _isRun = false;
     
 public:

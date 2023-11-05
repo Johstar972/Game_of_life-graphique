@@ -10,7 +10,7 @@ Game::Game()
     unsigned int screenSize_x = SCREEN[0].width / 8;
     unsigned int screenSize_y = SCREEN[0].height / 6;
     window.setPosition(sf::Vector2i(screenSize_x, screenSize_y));
-    window.setFramerateLimit(3);
+    window.setFramerateLimit(TIME_PER_SECOND.asSeconds());
 }
 
 Game::~Game(){}

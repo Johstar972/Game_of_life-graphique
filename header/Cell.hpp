@@ -10,7 +10,7 @@ private:
     int _alive;
     sf::RectangleShape _shape;
     float _rectSize;
-    int currentCellSize;
+    int _currentCellSize;
     sf::FloatRect _bounds;
     Position _position;
 
@@ -41,6 +41,14 @@ public:
      *
      */
     ~Cell();
+
+    /**
+     * @brief Fonction membre permettant d'initialiser la forme, la position et la couleur d'une cellule
+     * 
+     * @param row ligne 
+     * @param col colonne
+     */
+    void initShape(int row, int col);
 
     /**
      * @brief Fonction membre permettant de récupérer l'état de vie de la cellule
@@ -77,12 +85,21 @@ public:
      */
     void setRectBounds(sf::FloatRect fr);
 
+    int getCurrentCellSize() const;
+
     /**
      * @brief Fonction membre permettant de changer l'indicateur de taille de la cellule
      * 
-     * @param newSizeId 
+     * @param newSizeId Le nouvelle indicateur de taille
      */
     void setCurrentCellSize(int newSizeId);
+
+    /**
+     * @brief Fonction membre permettant de changer la taille de la cellule
+     * 
+     * @param newSize La nouvelle taille
+     */
+    void setCellSize(float newSize);
 
     /**
      * @brief Fonction membre permettant de modifier la position d'une cellule
@@ -164,7 +181,7 @@ inline void Cell::setAlive(int alive)
         else if(this->_alive == 1 && alive == 0)
         {
             this->_alive = alive;
-            _shape.setFillColor(sf::Color::Black);
+            _shape.setFillColor(sf::Color(220,220,220));
         }
         else
         {
@@ -181,10 +198,15 @@ inline void Cell::setPosition(int newX, int newY)
 
 inline void Cell::setCurrentCellSize(int newCellSizeId)
 {
-    if(newCellSizeId >= 0 || newCellSizeId <= 8)
-        this->_rectSize = newCellSizeId;
+    if(newCellSizeId >= 0 && newCellSizeId <= 8)
+        this->_currentCellSize = newCellSizeId;
     else
         std::__throw_invalid_argument("L'indicateur de taille de la cellule ne peut pas être sup a 8 ou inf a 0");
+}
+
+inline void Cell::setCellSize(float newSize)
+{
+    this->_rectSize = newSize;
 }
 
 

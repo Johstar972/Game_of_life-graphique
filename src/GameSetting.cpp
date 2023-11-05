@@ -55,11 +55,11 @@ GameSetting::GameSetting()
             break;
         case 4:
             _buttonSetting[i].setString("-->");
-            _buttonSetting[i].setPosition(1650,650);
+            _buttonSetting[i].setPosition(1800,650);
             break;
         case 5:
             _buttonSetting[i].setString("<--");
-            _buttonSetting[i].setPosition(1550,650);
+            _buttonSetting[i].setPosition(1655,650);
             break;
         }
 
