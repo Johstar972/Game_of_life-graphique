@@ -22,6 +22,7 @@ const int HEIGHT_MENU = 1000;
 const int BUTTONS_GAME_SETTING = 6;
 const float WIDTH_GAME_SETTING = 500.f;
 const float HEIGHT_GAME_SETTING = 1000.f;
+const int NB_RECT = 4;
 
 //Cell
 const float SIZES[8] = {14.5f, 19.5f, 24.5f, 29.5f, 34.5f, 39.5f, 44.5f, 49.5f};

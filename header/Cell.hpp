@@ -4,6 +4,10 @@
 #include "Position.hpp"
 #include <SFML/Graphics.hpp>
 
+/**
+ * @brief Class représentant une cellule
+ * 
+ */
 class Cell
 {
 private:

@@ -72,6 +72,10 @@ void Game::run()
                         }
                     }
                 }
+                else if( event.type == sf::Event::TextEntered)
+                {
+                    
+                }
                 
                 
             }

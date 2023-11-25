@@ -3,6 +3,7 @@
 #include "../header/constants.hpp"
 #include <SFML/Graphics/RenderWindow.hpp>
 #include <math.h>
+#include <chrono>
 
 
 GameBoard::GameBoard(sf::RenderWindow &window, int row, int col)
@@ -117,6 +118,7 @@ void GameBoard::update(sf::RenderWindow &window)
 
 bool GameBoard::buttonTextIsClicked(int mouseX, int mouseY, bool state, sf::RenderWindow &window)
 {
+    auto start = std::chrono::system_clock::now();
     const std::vector<sf::Text> &buttons = _gameSetting.getButtonSetting();
 
     for(int i = 0; i < buttons.size(); i++)
@@ -146,22 +148,17 @@ bool GameBoard::buttonTextIsClicked(int mouseX, int mouseY, bool state, sf::Rend
                     return state;
                 //Faire en sorte que _isRun passe a false
                 break;
-            case 4: 
-                this->changeCellSize(i);
-                break;
-            case 5: 
-                this->changeCellSize(i);
-                break;
-        
             }
             
         }
     }
-
+    auto end = std::chrono::system_clock::now();
+    std::chrono::duration<double> elapsed_second = end-start;
+    std::cout << elapsed_second.count() << std::endl;
     return true;
 }
 
-void GameBoard::changeCellSize(int buttonId)
+void GameBoard::setSizeOfGrid(int buttonId)
 {
     if(buttonId == 4)
     {

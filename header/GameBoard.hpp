@@ -4,6 +4,10 @@
 #include "Cell.hpp"
 #include "GameSetting.hpp"
 
+/**
+ * @brief Class GameBoard représente la grille de jeu
+ * 
+ */
 class GameBoard
 {
 private:
@@ -48,7 +52,7 @@ public:
      * @brief Cette fonction membre augmentera ou diminuera la taille et le nombre de cellule en ligne et colonne
      * 
      */
-    void changeCellSize(int buttonId);
+    void setSizeOfGrid(int buttonId);
 
     /**
      * @brief Cette fonction membre permettra de réaliser une action en cliquant sur les boutons textuels

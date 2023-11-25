@@ -4,6 +4,10 @@
 #include <SFML/Graphics/RenderWindow.hpp>
 #include <iostream>
 
+/**
+ * @brief Class représenant le jeu
+ * 
+ */
 class Game
 {
 private:
