@@ -176,23 +176,22 @@ inline std::ostream &operator<<(std::ostream &os, const Cell &cell)
 
 inline void Cell::setAlive(int alive)
 {
-
-        if(this->_alive == 0 && alive == 1)
-        {
-            this->_alive = alive;
-            _shape.setFillColor(sf::Color(255,255,0));
-        }
-        else if(this->_alive == 1 && alive == 0)
-        {
-            this->_alive = alive;
-            _shape.setFillColor(sf::Color(220,220,220));
-        }
-        else
-        {
-            throw std::invalid_argument("Une cellule vivant (1) peut être morte (0) ou inversement");
-        }
-
+    if (alive == 0)
+    {
+        this->_alive = 0;
+        _shape.setFillColor(sf::Color(220, 220, 220));
+    }
+    else if (alive == 1)
+    {
+        this->_alive = 1;
+        _shape.setFillColor(sf::Color(255, 255, 0));
+    }
+    else
+    {
+        throw std::invalid_argument("La valeur de 'alive' doit être 0 ou 1.");
+    }
 }
+
 
 inline void Cell::setPosition(int newX, int newY)
 {

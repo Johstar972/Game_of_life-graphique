@@ -3,7 +3,7 @@
 
 #include <iostream>
 /**
- * Cette classe représente une position  avec un x et un y
+ * Cette class représente une position  avec un x et un y
  */
 class Position
 {

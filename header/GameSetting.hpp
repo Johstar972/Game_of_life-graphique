@@ -4,13 +4,17 @@
 #include <SFML/Graphics.hpp>
 #include "Game.hpp"
                                                                                                                              
-
+/**
+ * @brief Class représentant l'interface des options de jeu
+ * 
+ */
 class GameSetting 
 {
 private:
     float _width, _height;
     std::vector<sf::Text> _buttonSetting;
     std::vector<sf::RectangleShape> _shapes;
+    std::vector<sf::Text> _texts;
     sf::Texture _texture;
     sf::Font _font;
 
@@ -41,8 +45,8 @@ public:
      */
     const std::vector<sf::Text> &getButtonSetting() const;
 
-    
 
+    std::vector<sf::Text> &getText();
    
 };
 

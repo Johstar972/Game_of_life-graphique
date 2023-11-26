@@ -3,19 +3,20 @@
 #include "../header/constants.hpp"
 #include <SFML/Graphics/RenderWindow.hpp>
 #include <math.h>
+#include <random>
+#include <ctime>
 #include <chrono>
 
 
 GameBoard::GameBoard(sf::RenderWindow &window, int row, int col)
 {
     
-    //On donne aux attributs la valeur de ligne et de colonne que l'utilisateur a choisie
-    this->setNumberRow(row); this->setNumberCol(col);
+    _row = row; _col = col;
 
-    //On ajuste la taille du vector
+    
     _cells.resize(_row,std::vector<Cell>(_col));
 
-    //On parcours le vecteur et l'on intialise chaque cellule 
+    
     for(int i = 0; i < _row; i++)
     {
         for(int j = 0; j < _col; j++)
@@ -75,14 +76,12 @@ void GameBoard::cellIsClicked(int mouseX, int mouseY)
                 if(_cells[i][j].getAlive() == 0)
                 {
                     _cells[i][j].setAlive(1);
-                    shape.setFillColor(sf::Color(255,255,0));
                     break;
                     
                 }
                 else
                 {
                     _cells[i][j].setAlive(0);
-                    shape.setFillColor(sf::Color(220,220,220));
                     break;
                     
                 }
@@ -94,6 +93,7 @@ void GameBoard::cellIsClicked(int mouseX, int mouseY)
 
 void GameBoard::update(sf::RenderWindow &window)
 {
+
     for(int i = 0; i < _row; i++)
     {
         for(int j = 0; j < _col; j++)
@@ -102,6 +102,9 @@ void GameBoard::update(sf::RenderWindow &window)
             window.draw(shape);
         }
     }
+
+    
+    stats();
 
     for(auto &shapeSetting : _gameSetting.getShapes())
     {
@@ -113,12 +116,19 @@ void GameBoard::update(sf::RenderWindow &window)
     {
         window.draw(buttons[i]);
     }
+
+    std::vector<sf::Text> texts = _gameSetting.getText();
+    for(int i = 0; i < texts.size(); i ++)
+    {
+        window.draw(texts[i]);
+        
+    }
     
 }
 
-bool GameBoard::buttonTextIsClicked(int mouseX, int mouseY, bool state, sf::RenderWindow &window)
+bool GameBoard::buttonTextIsClicked(int mouseX, int mouseY, bool state)
 {
-    auto start = std::chrono::system_clock::now();
+    
     const std::vector<sf::Text> &buttons = _gameSetting.getButtonSetting();
 
     for(int i = 0; i < buttons.size(); i++)
@@ -137,60 +147,168 @@ bool GameBoard::buttonTextIsClicked(int mouseX, int mouseY, bool state, sf::Rend
                 break;
             case 2: 
                 std::cout << "bouton clear"<< std::endl;
-                clearGameBoard(window);
+                clearGameBoard();
                 break;
             case 3: 
                 std::cout << "bouton main menu"<< std::endl;
                 if(state == true)
                     state = false;
-                    clearGameBoard(window);
+                    clearGameBoard();
                     _canChange = false;
                     return state;
                 //Faire en sorte que _isRun passe a false
                 break;
+            case 4:
+                setSizeOfGrid(i);
+                break;
+
+            case 5:
+                setSizeOfGrid(i);
+                break;
+
+            case 6:
+                setSizeOfGrid(i);
+                break;
+
+            case 7:
+                setSizeOfGrid(i);
+                break;
+            case 8:
+                fillGridFully();
+                break;
+            case 9:
+                fillCheckerBoard();
+                break;
+            case 10:
+                fillGridRandom();
             }
             
         }
     }
-    auto end = std::chrono::system_clock::now();
-    std::chrono::duration<double> elapsed_second = end-start;
-    std::cout << elapsed_second.count() << std::endl;
+    
     return true;
 }
 
 void GameBoard::setSizeOfGrid(int buttonId)
 {
-    if(buttonId == 4)
+    int numericValue = 0;
+    std::string newValueString = "";
+    std::string stringValue = "";
+    std::vector<sf::Text> &texts = _gameSetting.getText();
+
+    if (buttonId == 4 || buttonId == 5)
     {
-        std::cout << "J'augmente la taille des cellules";
-        //On augmente la taille de la cellule
-        _currentSizeCell += 1;
-        for(int i = 0; i < _row; i++)
+        stringValue = texts[0].getString().toAnsiString();
+    }
+    else
+    {
+        stringValue = texts[1].getString().toAnsiString();
+    }
+
+    try
+    {
+        numericValue = std::stoi(stringValue);
+    }
+    catch (const std::invalid_argument &e)
+    {
+        std::cerr << "Erreur : la conversion en entier a échoué (argument invalide)" << std::endl;
+    }
+    catch (const std::out_of_range &e)
+    {
+        std::cerr << "Erreur : la conversion en entier a échoué (dépassement de capacité)" << std::endl;
+    }
+
+    switch (buttonId)
+    {
+    case 4:
+        if (_row > 0)
+            numericValue += -1;
+        // Convertir la nouvelle valeur en std::string
+        newValueString = std::to_string(numericValue);
+
+        texts[0].setString(newValueString);
+        _row = numericValue;
+
+        _cells.resize(_row, std::vector<Cell>(_col));
+        for (int i = 0; i < _row; i++)
         {
-            for(int j = 0; j < _col; j++)
+            _cells[i].resize(_col);
+            for (int j = 0; j < _col; j++)
             {
-                
-                _cells[i][j].setCurrentCellSize(_currentSizeCell);
-            
-                //window.draw(shape);
+                _cells[i][j].initShape(i, j);
             }
         }
-        _row = std::floor(WIDTH_GAME / SIZES[_currentSizeCell]);
-        
-        _cells.resize(_row,std::vector<Cell>(_col));
+
+        break;
+
+    case 5:
+
+        if (_row < NB_ROW)
+            numericValue += 1;
+        // Convertir la nouvelle valeur en std::string
+        newValueString = std::to_string(numericValue);
+
+        texts[0].setString(newValueString);
+        _row = numericValue;
+
+        _cells.resize(_row, std::vector<Cell>(_col));
+        for (int i = 0; i < _row; i++)
+        {
+            _cells[i].resize(_col);
+            for (int j = 0; j < _col; j++)
+            {
+                _cells[i][j].initShape(i, j);
+            }
+        }
+
+        break;
+
+    case 6:
+        if (_col > 0)
+            numericValue += -1;
+        // Convertir la nouvelle valeur en std::string
+        newValueString = std::to_string(numericValue);
+
+        texts[1].setString(newValueString);
+        _col = numericValue;
+
+        // Redimensionner chaque ligne à l'intérieur de _cells
+        for (int i = 0; i < _row; i++)
+        {
+            _cells[i].resize(_col);
+            for (int j = 0; j < _col; j++)
+            {
+                _cells[i][j].initShape(i, j);
+            }
+        }
+
+        break;
+
+    case 7:
+        if (_col < NB_COL)
+            numericValue += 1;
+        // Convertir la nouvelle valeur en std::string
+        newValueString = std::to_string(numericValue);
+
+        texts[1].setString(newValueString);
+        _col = numericValue;
+
+        // Redimensionner chaque ligne à l'intérieur de _cells
+        for (int i = 0; i < _row; i++)
+        {
+            _cells[i].resize(_col);
+            for (int j = 0; j < _col; j++)
+            {
+                _cells[i][j].initShape(i, j);
+            }
+        }
+
+        break;
     }
-    else if(buttonId == 5)
-    {
-        std::cout << "Je diminue la taille des cellules";
-        
-        if(_row > 4)
-            this->setNumberRow(_row - 1);
-            _cells.resize(_row,std::vector<Cell>(_col));
-    }
-    
 }
 
-void GameBoard::evolve(sf::RenderWindow& window)
+
+void GameBoard::evolve()
 {
     
     std::vector<std::vector<Cell>> copygrid = _cells;
@@ -219,10 +337,7 @@ void GameBoard::evolve(sf::RenderWindow& window)
             
         }
     }
-    // if(_cells == copygrid)
-    // {
-    //     _canChange = false;
-    // }
+    
 
 }
 
@@ -260,7 +375,87 @@ std::tuple<int,int> GameBoard::isArround(int x, int y, const std::vector<std::ve
     return std::make_tuple(nbCellInLife, nbCellDead);
 }
 
-void GameBoard::clearGameBoard(sf::RenderWindow &window)
+void GameBoard::fillGridFully()
+{
+    for(int i = 0; i < _cells.size(); i++)
+    {
+        for(int j = 0; j <_cells[i].size(); j++)
+        {
+            sf::RectangleShape &shape = _cells[i][j].getShape();
+            _cells[i][j].setAlive(1);
+        }
+    }
+}
+
+void GameBoard::fillCheckerBoard()
+{
+    for(int i = 0; i < _cells.size(); i++)
+    {
+        for(int j = 0; j <_cells[i].size(); j++)
+        {
+            sf::RectangleShape &shape = _cells[i][j].getShape();
+            if ((i + j) % 2 != 0) {
+                _cells[i][j].setAlive(1);
+            }
+        }
+    }
+}
+
+void GameBoard::fillGridRandom()
+{
+    srand(time(NULL));
+    int nbCells = rand() % ((400 - 1) - 250 + 1) + 250;
+
+    for (int k = 0; k < nbCells; k++)
+    {
+        int i = std::rand() % _cells.size();
+        int j = std::rand() % _cells[i].size();
+
+        sf::RectangleShape &shape = _cells[i][j].getShape();
+
+        _cells[i][j].setAlive(1);
+        
+    }
+}
+
+#include <iomanip>  // Pour std::setprecision
+#include <sstream>  // Pour std::ostringstream
+
+void GameBoard::stats()
+{
+    int nbCellsAlive = 0, nbCellsDead = 0;
+    double pCellsAlive = 0.0, pCellsDead = 0.0;
+
+    // Calcul des statistiques
+    for (int i = 0; i < _cells.size(); i++)
+    {
+        for (int j = 0; j < _cells[i].size(); j++)
+        {
+            if (_cells[i][j].getAlive() == 1)
+                nbCellsDead += 1;
+            else
+                nbCellsAlive += 1;
+        }
+    }
+
+    // Calcul des pourcentages
+    int totalCells = _cells.size() * _cells[0].size();
+    pCellsAlive = (static_cast<double>(nbCellsAlive) / totalCells) * 100;
+    pCellsDead = (static_cast<double>(nbCellsDead) / totalCells) * 100;
+
+    // Conversion des pourcentages en chaînes avec un chiffre après la virgule
+    std::ostringstream pCellsDeadStream, pCellsAliveStream;
+    pCellsDeadStream << std::fixed << std::setprecision(1) << pCellsDead;
+    pCellsAliveStream << std::fixed << std::setprecision(1) << pCellsAlive;
+
+    // Mise à jour des textes
+    std::vector<sf::Text> &texts = _gameSetting.getText();
+    texts[2].setString("Cellule(s) vivante(s) -> " + pCellsDeadStream.str() + "%");
+    texts[3].setString("Cellule(s) morte(s) -> " + pCellsAliveStream.str() + "%");
+}
+
+
+void GameBoard::clearGameBoard()
 {
     for(int i = 0; i < _row; i++)
     {
@@ -269,7 +464,7 @@ void GameBoard::clearGameBoard(sf::RenderWindow &window)
             sf::RectangleShape &shape = _cells[i][j].getShape();
             if(_cells[i][j].getAlive() == 1)
                 _cells[i][j].setAlive(0);
-            shape.setFillColor(sf::Color(220,220,220));
+            
         }
     }
 }

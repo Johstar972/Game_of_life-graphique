@@ -1,6 +1,10 @@
 #include <SFML/Graphics.hpp>
 #include <iostream>
 
+/**
+ * @brief Class représentant le menu du jeu
+ * 
+ */
 class Menu
 {
 private:

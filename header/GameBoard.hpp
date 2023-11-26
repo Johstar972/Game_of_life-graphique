@@ -60,11 +60,10 @@ public:
      * @param mouseX Le point x de la position de la souris
      * @param mouseY Le point y de la position de la souris
      * @param state L'état du jeu
-     * @param window La fenetre de jeu
      * @return true Si le jeu est toujours en marche
      * @return sinon false 
      */
-    bool buttonTextIsClicked(int mouseX, int mouseY, bool state, sf::RenderWindow& window);
+    bool buttonTextIsClicked(int mouseX, int mouseY, bool state);
 
     /**
      * @brief Méthode permetant de vérifier le nombre de voisin mort et vivant autour d'une cellule
@@ -80,18 +79,72 @@ public:
      * @brief //Methode permettant de faire evoluer selon les regles 
      * les cellules vers la gen suivante
      */
-    void evolve(sf::RenderWindow &window);
+    void evolve();
 
-    void clearGameBoard(sf::RenderWindow &window);
+    /**
+     * @brief Fonction membre permettant de supprimer toute les cellules vivantes
+     * 
+     */
+    void clearGameBoard();
 
+    /**
+     * @brief Fonction membre permettant de mettre tout les cellules vivantes
+     * 
+     */
+    void fillGridFully();
+
+    /**
+     * @brief Fonction membre permettant de remplir le tableau de cellule vivantes comme un damier
+     * 
+     */
+    void fillCheckerBoard();
+
+    /**
+     * @brief Fonction membre permettant de remplir le tableau de manière aléatoire de cellule vivante
+     * 
+     */
+    void fillGridRandom();
+
+    /**
+     * @brief Fonction membre permettant d'afficher des statistiques 
+     * 
+     */
+    void stats();
+
+    /**
+     * @brief Fonction membre permettant de récupérer le nombre de ligne sur le tableau
+     * 
+     * @return int 
+     */
     int getNumberRow() const;
 
+    /**
+     * @brief Fonction membre permettant de récupérer le nombre de colonne sur le tableau
+     * 
+     * @return int 
+     */
     int getNumberCol() const;
 
+    /**
+     * @brief Fonction membre permettant de savoir si le tableau peut changer
+     * 
+     * @return true 
+     * @return false 
+     */
     bool getIsChange() const;
 
+    /**
+     * @brief Fonction membre permettant de modifier le nombre de ligne du tableau
+     * 
+     * @param newNumberRow 
+     */
     void setNumberRow(int newNumberRow);
 
+    /**
+     * @brief Fonction membre permettant de modifier le nombre de colonne du tableau
+     * 
+     * @param newNumberCol 
+     */
     void setNumberCol(int newNumberCol);
 
     /**
@@ -103,9 +156,6 @@ public:
      */
     bool operator ==(const GameBoard &gb);
 
-    //Implémenter des méthodes permettant la gestion de gamesetting
-    //Insister sur la methode qui ajoute et retire des lignes et colonnes afin quelle
-    //soit vraiment complète
 };
 
 inline void GameBoard::setNumberRow(int newNumberRow)

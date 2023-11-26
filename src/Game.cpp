@@ -19,7 +19,7 @@ void Game::run()
 {
     Menu menu;
     //Mettre une limite de colonne a 100
-    GameBoard gameBoard(window, 75, 50);
+    GameBoard gameBoard(window, NB_ROW, NB_COL);
     
     bool &inGame = _isRun; // Un indicateur pour savoir si le jeu est lancé
     sf::Clock clock;
@@ -45,7 +45,7 @@ void Game::run()
                     if(inGame)
                     { 
                         gameBoard.cellIsClicked(mouseX, mouseY);
-                        _isRun = gameBoard.buttonTextIsClicked(mouseX, mouseY, inGame, window);
+                        _isRun = gameBoard.buttonTextIsClicked(mouseX, mouseY, inGame);
                         
                     }
                     else
@@ -91,7 +91,7 @@ void Game::run()
                 //Si la grlle peut être modifier alors
                 if(gameBoard.getIsChange())
                     //On appelle evolve pour passer à la prochaine génération de cellule
-                    gameBoard.evolve(window);
+                    gameBoard.evolve();
 
                 gameBoard.update(window);
                 
