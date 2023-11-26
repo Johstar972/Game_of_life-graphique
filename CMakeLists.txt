@@ -4,8 +4,6 @@ project(Game_of_life_graphique)
 # Recherchez la bibliothèque SFML
 find_package(SFML 2.5 COMPONENTS graphics window system REQUIRED)
 
-# Incluez les en-têtes de SFML
-include_directories(${SFML_INCLUDE_DIR})
 
 # Ajoutez vos fichiers source
 add_executable(Game_of_life src/main.cpp src/Menu.cpp src/Position.cpp src/GameSetting.cpp 
