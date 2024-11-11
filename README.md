@@ -1,4 +1,4 @@
-# Game_of_life-graphique
+# Game of life graphique
 
 ## Installation et Configuration de SFML pour Game of Life Graphique
 

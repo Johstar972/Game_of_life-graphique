@@ -83,27 +83,27 @@ void Game::run()
         }
 
             
-            clock.restart();
-            window.clear();
+        clock.restart();
+        window.clear();
 
-            if (inGame)//Si je suis en jeu, je mets a jour l'affichage
-            {
-                //Si la grlle peut être modifier alors
-                if(gameBoard.getIsChange())
-                    //On appelle evolve pour passer à la prochaine génération de cellule
-                    gameBoard.evolve();
+        if (inGame)//Si je suis en jeu, je mets a jour l'affichage
+        {
+            //Si la grlle peut être modifier alors
+            if(gameBoard.getIsChange())
+                //On appelle evolve pour passer à la prochaine génération de cellule
+                gameBoard.evolve();
 
-                gameBoard.update(window);
-                
-            } 
-            else //sinon j'affiche le menu
-            {
-                
-                menu.draw(window);
-                window.draw(menu.getGameTitle());
-            }
+            gameBoard.update(window);
+            
+        } 
+        else //sinon j'affiche le menu
+        {
+            
+            menu.draw(window);
+            window.draw(menu.getGameTitle());
+        }
 
-            window.display();
+        window.display();
     }
 }
 
